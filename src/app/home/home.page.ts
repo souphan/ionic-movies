@@ -11,8 +11,6 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  countries: any[];
-  loadedCountries: any[];
   movies: any;
   loadedMovies: any;
   errorMessage: string;
@@ -20,19 +18,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, 
     private router: Router, 
     public rest: RestApiService) {
-    this.getCountries();
     this.getMovies();
-  }
-
-  getCountries() {
-    this.rest.getCountries()
-       .subscribe(
-         countries => {
-           this.countries = countries;
-           this.loadedCountries = countries;
-           
-        },
-         error =>  this.errorMessage = <any>error);
   }
 
   getMovies() {
@@ -50,12 +36,12 @@ export class HomePage {
     this.movies = this.loadedMovies;
   }
 
-  getItems(event) {
+  getItems(searchbar) {
     // Reset items back to all of the items
     this.initializeItems();
   
     // set q to the value of the searchbar
-    var q = event.srcElement.value;
+    var q = searchbar.srcElement.value;
   
   
     // if the value is an empty string don't filter the items
@@ -63,7 +49,7 @@ export class HomePage {
       return;
     }
   
-    this.movies = this.movies.results.filter((v) => {
+    this.movies = this.movies.filter((v) => {
       if(v.title && q) {
         if (v.title.toLowerCase().indexOf(q.toLowerCase()) > -1) {
           return true;
@@ -82,6 +68,6 @@ export class HomePage {
 
   public search(event){
     console.log(event);
-    this.router.navigate(["./search-results", { movie: this.movies }]);
+    this.router.navigate(["./search-results", { movie: event }]);
   }
 }

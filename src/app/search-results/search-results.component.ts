@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../service/rest-api/rest-api.service';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 import { Router } from '@angular/router';
 import {ActivatedRoute} from "@angular/router";
@@ -19,7 +19,6 @@ export class SearchResultsComponent implements OnInit {
   errorMessage: string;
 
   constructor(public navCtrl: NavController, 
-    public navParams: NavParams,
     private router: Router, 
     public rest: RestApiService) {
   }
