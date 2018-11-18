@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SearchPipe } from '../pipes/search/search.pipe';
+import { SortPipe } from '../pipes/sort/sort.pipe';
 
 import { HomePage } from './home.page';
 
@@ -18,6 +20,10 @@ import { HomePage } from './home.page';
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [
+    HomePage,
+    SearchPipe, 
+    SortPipe
+  ]
 })
 export class HomePageModule {}

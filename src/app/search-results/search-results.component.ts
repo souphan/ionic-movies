@@ -1,16 +1,17 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../service/rest-api/rest-api.service';
-import { NavController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { NavController, NavParams } from '@ionic/angular';
 
-// import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { Router } from '@angular/router';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-search-results',
+  templateUrl: './search-results.component.html',
+  styleUrls: ['./search-results.component.scss']
 })
-export class HomePage {
+export class SearchResultsComponent implements OnInit {
+
   countries: any[];
   loadedCountries: any[];
   movies: any;
@@ -18,10 +19,9 @@ export class HomePage {
   errorMessage: string;
 
   constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
     private router: Router, 
     public rest: RestApiService) {
-    this.getCountries();
-    this.getMovies();
   }
 
   getCountries() {
@@ -47,15 +47,15 @@ export class HomePage {
   }
 
   initializeItems(): void {
-    this.movies = this.loadedMovies;
+    this.countries = this.loadedCountries;
   }
 
-  getItems(event) {
+  getItems(searchbar) {
     // Reset items back to all of the items
     this.initializeItems();
   
     // set q to the value of the searchbar
-    var q = event.srcElement.value;
+    var q = searchbar.srcElement.value;
   
   
     // if the value is an empty string don't filter the items
@@ -63,25 +63,21 @@ export class HomePage {
       return;
     }
   
-    this.movies = this.movies.results.filter((v) => {
-      if(v.title && q) {
-        if (v.title.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+    this.countries = this.countries.filter((v) => {
+      if(v.name && q) {
+        if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
           return true;
         }
         return false;
       }
     });
   
-    console.log(q, this.movies.length);
+    console.log(q, this.countries.length);
   
   }
 
-  public searchGet(event){
-    console.log(event);
+  public search(){
+    this.router.navigate(["./search-results"]);
   }
 
-  public search(event){
-    console.log(event);
-    this.router.navigate(["./search-results", { movie: this.movies }]);
-  }
 }
