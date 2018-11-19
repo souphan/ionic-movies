@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { RestApiService } from '../service/rest-api/rest-api.service';
-import { NavController } from '@ionic/angular';
-
-import { Router } from '@angular/router';
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -31,8 +28,7 @@ export class SearchResultsComponent {
   errorMessage: string;
   
   
-  constructor(public navCtrl: NavController, 
-    private router: Router, 
+  constructor(
     private route: ActivatedRoute,
     public rest: RestApiService) {
       if(this.route.snapshot.params) {
