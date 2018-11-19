@@ -14,6 +14,7 @@ export class HomePage {
     private router: Router) {
   }
 
+  // Search method that sends the searchTerm string to SearchResults Component.
   search(){
     this.router.navigate(["./search-results", { searchTerm: this.searchTerm }]);
   }

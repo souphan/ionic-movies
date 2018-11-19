@@ -12,6 +12,7 @@ export class RestApiService {
 
   constructor(private http:HttpClient) { }
 
+  // Rest API that uses TMDB Discover API to retrieve all kid movies rated G.
   public getMovies(page?) {
     return this.http.get(this.apiUrlMovies + page)
     .pipe(
@@ -26,6 +27,7 @@ export class RestApiService {
     )
   }
   
+  // Error handler
   private handleError (error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
