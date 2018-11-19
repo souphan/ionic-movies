@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestApiService {
   // API URL Kids Movies Query with TMDB API key
-  private apiUrlMovies = 'https://api.themoviedb.org/3/discover/movie?api_key=4289f6af9e16ad04c8be0e5c512c7397&language=en-US&sort_by=popularity.desc&certification_country=US&certification.lte=G&sort_by=popularity.desc';
+  private apiUrlMovies = 'https://api.themoviedb.org/3/discover/movie?api_key=4289f6af9e16ad04c8be0e5c512c7397&language=en-US&sort_by=popularity.desc&certification_country=US&certification.lte=G&include_adult=false&include_video=false&page=';
 
   constructor(private http:HttpClient) { }
 
-  public getMovies() {
-    return this.http.get(this.apiUrlMovies)
+  public getMovies(page?) {
+    return this.http.get(this.apiUrlMovies + page)
     .pipe(
       map(res => {
-        return res.results;
+        return res;
       })
     ).pipe(
       catchError((error) => {

@@ -4,8 +4,7 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
 
-// import { ScreenOrientation } from '@ionic-native/screen-orientation';
-
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -29,7 +28,7 @@ import { SearchResultsComponent } from './search-results/search-results.componen
   providers: [
     StatusBar,
     SplashScreen,
-    // ScreenOrientation,
+    ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
